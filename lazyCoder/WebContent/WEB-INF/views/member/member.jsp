@@ -186,7 +186,7 @@ function userIdCheck() {
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
 			            <input type="text" name="userId" id="userId" value="${dto.userId}"
                          onchange="userIdCheck();" style="width: 95%;"
-                         ${mode=="update" ? "readonly='readonly' ":""}
+                         ${mode=="update" ? "readonly='readonly', ${dto.userId} ":""}
                          maxlength="15" class="boxTF" placeholder="아이디">
 			        </p>
 			        <p class="help-block">아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.</p>
@@ -335,6 +335,9 @@ function userIdCheck() {
 			        <button type="button" name="sendButton" class="btn" onclick="memberOk();">${mode=="member"?"회원가입":"정보수정"}</button>
 			        <button type="reset" class="btn">다시입력</button>
 			        <button type="button" class="btn" onclick="javascript:location.href='${pageContext.request.contextPath}/';">${mode=="member"?"가입취소":"수정취소"}</button>
+			     	<c:if test="${mode=='update' }">
+			     	<button type="button" class="btn" onclick="javascript:location.href='${pageContext.request.contextPath}/member/pwd.do';">회원탈퇴</button>
+			     	</c:if>
 			      </td>
 			    </tr>
 			    <tr height="30">

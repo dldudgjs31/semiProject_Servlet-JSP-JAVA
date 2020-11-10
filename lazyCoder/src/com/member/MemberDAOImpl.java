@@ -227,4 +227,67 @@ public class MemberDAOImpl implements MemberDAO {
 		return result;
 	}
 
+	@Override
+	public int deleteMember(String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql;
+		// member1 테이블과 member2 테이블에 회원 정보 저장
+
+		try {
+			
+			conn.setAutoCommit(false); // 자동 커밋되지 않도록
+			sql = "DELETE FROM member2 WHERE userId=?";
+
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+
+			result=pstmt.executeUpdate();
+			
+			pstmt.close();
+			result=0;
+			sql="";
+			sql="DELETE FROM member1 WHERE userId=?";
+			
+			pstmt=conn.prepareStatement(sql);
+
+			pstmt.setString(1, userId);
+
+			result = pstmt.executeUpdate();
+
+			conn.commit();// 커밋
+		} catch (SQLIntegrityConstraintViolationException e) {
+			try {
+				conn.rollback();// 예외발생하면 롤백
+			} catch (Exception e2) {
+			}
+			e.printStackTrace();
+		} catch (SQLDataException e) {
+			try {
+				conn.rollback();// 예외발생하면 롤백
+			} catch (Exception e2) {
+			}
+			e.printStackTrace();
+		} catch (SQLException e) {
+			try {
+				conn.rollback();// 예외발생하면 롤백
+			} catch (Exception e2) {
+			}
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e2) {
+				}
+			}
+			try {
+				conn.setAutoCommit(true);// 자동커밋되도록(기본)
+			} catch (Exception e2) {
+			}
+		}
+		return result;
+	}
+
 }

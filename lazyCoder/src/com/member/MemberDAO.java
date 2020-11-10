@@ -10,6 +10,8 @@ public interface MemberDAO {
 	
 	public int updateMember(String userId,MemberDTO dto);
 	
+	public int deleteMember(String userId);
+	
 	
 	
 }

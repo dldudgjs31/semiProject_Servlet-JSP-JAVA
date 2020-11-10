@@ -57,6 +57,8 @@ public class MemberServlet extends HttpServlet{
 			updateSubmit(req, resp);
 		}else if (uri.indexOf("userIdCheck.do")!=-1) {
 			userIdCheck(req, resp);
+		}else if (uri.indexOf("delete.do")!=-1) {
+			deleteMember(req, resp);
 		}
 		
 	}
@@ -172,11 +174,58 @@ public class MemberServlet extends HttpServlet{
 	}
 	
 	protected void pwdForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//수정, 탈퇴 등에서 패스워드 입력 폼
+		// 탈퇴 등에서 패스워드 입력 폼
+		HttpSession session=req.getSession();
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		try {
+			req.setAttribute("mode", "delete");
+			req.setAttribute("userId", info.getUserId());
+			req.setAttribute("title", "회원 탈퇴");
+			String path="/WEB-INF/views/member/pwd.jsp";
+			forward(req, resp, path);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	protected void pwdSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//패스워드 검사
+		MemberDAO dao=new MemberDAOImpl();
+		HttpSession session=req.getSession();
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		int result=0;
+		String cp=req.getContextPath();
+		
+		try {
+			
+			MemberDTO dto=dao.readMember(info.getUserId());
+			String pwd=req.getParameter("pwd");
+			req.setAttribute("mode", "delete");
+			req.setAttribute("title", "회원 탈퇴");
+			
+			
+			if(dto.getUserPwd().equals(pwd)) {
+				result=dao.deleteMember(dto.getUserId());
+			}
+			if(result==0) {
+				req.setAttribute("message", "탈퇴에 실패하였습니다");
+				String path="/WEB-INF/views/member/pwd.jsp";
+				forward(req, resp, path);
+				return;
+			}
+			
+			resp.sendRedirect("${pageContext.request.contextPath}/member/logout.do"); //최상위에 있는 파일을 불러오므로 index.jsp가 실행된다
+			
+			return;
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 	
 	protected void updateForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -231,8 +280,20 @@ public class MemberServlet extends HttpServlet{
 	
 	protected void userIdCheck(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//회원 아이디 중복 검사
+		
 	}
-	
+	protected void deleteMember(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//회원 아이디 중복 검사
+		HttpSession session=req.getSession();
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		MemberDAO dao=new MemberDAOImpl();
+		
+		dao.deleteMember(info.getUserId());
+		
+		
+		
+	}
 	
 	
 	
