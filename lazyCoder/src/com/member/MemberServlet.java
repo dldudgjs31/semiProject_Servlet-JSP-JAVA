@@ -1,6 +1,8 @@
 package com.member;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.sql.SQLDataException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.util.MyUtil;
 
 @WebServlet("/member/*")
 public class MemberServlet extends HttpServlet{
@@ -40,6 +44,8 @@ public class MemberServlet extends HttpServlet{
 		
 		if(uri.indexOf("login.do")!=-1) {
 			loginForm(req, resp);
+		}else if (uri.indexOf("list.do")!=-1) {
+			list(req, resp);
 		}else if (uri.indexOf("login_ok.do")!=-1) {
 			loginSubmit(req, resp);
 		}else if (uri.indexOf("logout.do")!=-1) {
@@ -63,6 +69,73 @@ public class MemberServlet extends HttpServlet{
 		}
 		
 	}
+	
+	protected void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		MemberDAO dao=new MemberDAOImpl();
+		MyUtil util=new MyUtil();
+		String cp=req.getContextPath();
+		
+		String page=req.getParameter("page");
+		int current_page=1;
+		if(page!=null) {
+			current_page=Integer.parseInt(page);
+		}
+		
+		String condition=req.getParameter("condition");
+		String keyword=req.getParameter("keyword");
+		if(condition==null) {
+			condition="all";
+			keyword="";
+		}
+		
+		if(req.getMethod().equalsIgnoreCase("GET")) {
+			keyword=URLDecoder.decode(keyword, "utf-8");
+		}
+		
+		int dataCount=dao.dataCount();
+		
+		
+		int rows=10;
+		int total_page=util.pageCount(rows, dataCount);
+		if(current_page>total_page) 
+			current_page=total_page;
+		
+		int offset=(current_page-1)*rows;
+		if(offset<0)
+			offset=0;
+		
+		List<MemberDTO> list=dao.listMember(offset, rows);
+	
+		
+		String query="";
+		if(keyword.length()!=0) {
+			query="condition="+condition+"&keyword="
+		         +URLEncoder.encode(keyword,"utf-8");
+		}
+		
+		String listUrl=cp+"/bbs/list.do";
+		String articleUrl=cp+"/bbs/article.do?page="+current_page;
+		if(query.length()!=0) {
+			listUrl+="?"+query;
+			articleUrl+="&"+query;
+		}
+		String paging=util.paging(current_page, total_page, listUrl);
+		
+		// /WEB-INF/views/bbs/list.jsp에 넘겨줄 데이터
+		req.setAttribute("list", list);
+		req.setAttribute("dataCount", dataCount);
+		req.setAttribute("total_page", total_page);
+		req.setAttribute("page", current_page);
+		req.setAttribute("paging", paging);
+		req.setAttribute("articleUrl", articleUrl);
+		req.setAttribute("condition", condition);
+		req.setAttribute("keyword", keyword);
+		
+		// JSP로 포워딩
+		String path="/WEB-INF/views/member/list.jsp";
+		forward(req, resp, path);
+	}
+	
 	
 	protected void loginForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//로그인 폼

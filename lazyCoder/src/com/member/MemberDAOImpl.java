@@ -155,6 +155,155 @@ public class MemberDAOImpl implements MemberDAO {
 		return dto;
 
 	}
+	
+	@Override
+	public List<MemberDTO> listMember(int offset, int rows){
+		List<MemberDTO> list=new ArrayList<MemberDTO>();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StringBuilder sb=new StringBuilder();
+		try {
+			sb.append("SELECT m1.userId, userName, tel, birth, email ");
+			sb.append(" FROM member1 m1");
+			sb.append(" JOIN member2 m2 ON m1.userId = m2.userId ");
+			sb.append(" ORDER BY userName DESC");
+			sb.append(" OFFSET ? ROWS FETCH FIRST ? ROWS ONLY");
+			
+			pstmt=conn.prepareStatement(sb.toString());
+			
+			pstmt.setInt(1, offset);
+			pstmt.setInt(2, rows);
+		
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MemberDTO dto=new MemberDTO();
+				dto.setUserId(rs.getString("userId"));
+				dto.setUserName(rs.getString("userName"));
+				dto.setTel(rs.getString("tel"));
+				dto.setBirth(rs.getString("birth"));
+				dto.setEmail(rs.getString("email"));
+				list.add(dto);
+			}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		if(rs!=null) {
+			try {
+				rs.close();
+			} catch (SQLException e2) {
+			}
+		}
+		
+		if(pstmt!=null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e2) {
+			}
+		}
+	}
+	return list;
+	}
+	
+	@Override
+	public int dataCount() {
+		int result=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql;
+		
+		try {
+			sql="SELECT COUNT(*) cnt FROM member1";
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e2) {
+				}
+			}
+			
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e2) {
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	
+	@Override
+	public List<MemberDTO> listMember(int offset, int rows, String condition, String keyword) {
+		List<MemberDTO> list=new ArrayList<MemberDTO>();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StringBuilder sb=new StringBuilder();
+		try {
+			sb.append("SELECT m1.userId, userName, tel, birth, email ");
+			sb.append(" FROM member1 m1");
+			sb.append(" JOIN member2 m2 ON m1.userId = m2.userId ");
+			
+			
+			if(condition.equals("tel")) {
+				keyword=keyword.replaceAll("(\\-)", "");
+				sb.append("  WHERE INSTR(tel, ?) = 1 ");
+			} else {
+				sb.append("  WHERE INSTR("+condition+", ?) >= 1 ");
+			}
+			
+			sb.append(" ORDER BY num DESC");
+			sb.append(" OFFSET ? ROWS FETCH FIRST ? ROWS ONLY");
+			
+			
+			pstmt=conn.prepareStatement(sb.toString());
+			
+			
+			pstmt.setString(1, keyword);
+			pstmt.setInt(2, offset);
+			pstmt.setInt(3, rows);
+		
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MemberDTO dto=new MemberDTO();
+				dto.setUserId(rs.getString("userId"));
+				dto.setUserName(rs.getString("userName"));
+				dto.setTel(rs.getString("tel"));
+				dto.setBirth(rs.getString("birth"));
+				dto.setEmail(rs.getString("email"));
+				list.add(dto);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e2) {
+				}
+			}
+			
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e2) {
+				}
+			}
+		}
+		return list;
+	}
+	
+	
 
 	@Override
 	public int updateMember(String userId,MemberDTO dto) {
