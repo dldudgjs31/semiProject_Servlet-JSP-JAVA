@@ -29,7 +29,7 @@
 <div class="container">
     <div class="body-container" style="width: 700px;">
         <div class="body-title">
-            <h3><span style="font-family: Webdings">2</span> 회원 정보 </h3>
+            <h3 style="font-family: 'Jua', sans-serif; "> <img src="${pageContext.request.contextPath}/resource/img/recruit_logo.png" style="width: 50px; height: 37.5px;"> 회원정보 </h3>
         </div>
         
         <div>
@@ -43,7 +43,7 @@
 			   </tr>
 			</table>
 			
-			<table style="width: 100%; border-spacing: 0; border-collapse: collapse;">
+			<table style="width: 100%; border-spacing: 0; border-collapse: collapse;font-family: 'Jua', sans-serif; ">
 			  <tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 			      <th width="70" style="color: #787878;">아이디</th>
 			      <th width="50" style="color: #787878;">이름</th>
@@ -94,9 +94,7 @@
     </div>
 </div>
 
-<div class="footer">
     <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
-</div>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery/js/jquery.ui.datepicker-ko.js"></script>

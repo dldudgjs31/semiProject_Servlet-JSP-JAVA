@@ -19,7 +19,7 @@ public class SessionInfo {
 		this.userId = userId;
 	}
 	public String getUserName() {
-		return userName;
+		return userName; 
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
