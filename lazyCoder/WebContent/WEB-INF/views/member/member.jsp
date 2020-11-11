@@ -162,7 +162,26 @@ function changeEmail() {
 }
 
 function userIdCheck() {
+	var f=document.memberForm;
 	
+	var str;
+	str = f.userId.value;
+	str = str.trim();
+	if(!str) {
+		alert("아이디를 입력하세요. ");
+		f.userId.focus();
+		return;
+	}
+	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
+		alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
+		f.userId.focus();
+		return;
+	}
+	f.userId.value = str;
+	
+	f.action = "${pageContext.request.contextPath}/member/userIdCheck.do";
+
+    f.submit();
 }
 </script>
 </head>
@@ -185,9 +204,12 @@ function userIdCheck() {
 			      <td style="padding: 0 0 15px 15px;">
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
 			            <input type="text" name="userId" id="userId" value="${dto.userId}"
-                         onchange="userIdCheck();" style="width: 95%;"
-                         ${mode=="update" ? "readonly='readonly', ${dto.userId} ":""}
+                         style="width: 95%;"
+                         ${mode=="update" ? "readonly='readonly'":"" }
                          maxlength="15" class="boxTF" placeholder="아이디">
+                         <c:if test="${mode=='member' }">
+				     	<button type="button" class="btn" style="margin: 10px 0 0 0; font-family: 'Jua', sans-serif;" onclick="userIdCheck()">아이디 중복 검사</button>${message }
+				     	</c:if>
 			        </p>
 			        <p class="help-block">아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.</p>
 			      </td>

@@ -3,6 +3,7 @@ package com.member;
 import java.io.IOException;
 import java.sql.SQLDataException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -196,7 +197,6 @@ public class MemberServlet extends HttpServlet{
 		HttpSession session=req.getSession();
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		int result=0;
-		String cp=req.getContextPath();
 		
 		try {
 			
@@ -280,16 +280,38 @@ public class MemberServlet extends HttpServlet{
 	
 	protected void userIdCheck(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//회원 아이디 중복 검사
+		MemberDAO dao=new MemberDAOImpl();
+		String cp=req.getContextPath();
+		List<String> list=dao.listmember();
+		try {
+			String userId=req.getParameter("userId");
+			
+			for(String s : list) {
+				if(s.equals(userId)) {
+					req.setAttribute("message", "아이디가 중복 됩니다.");
+					req.setAttribute("mode", "member");
+					req.setAttribute("title", "회원 가입");
+					String path="/WEB-INF/views/member/member.jsp";
+					forward(req, resp, path);
+					return;
+				}
+			}
+				req.setAttribute("mode", "member");
+				req.setAttribute("userId", userId);
+				req.setAttribute("title", "회원 가입");
+				req.setAttribute("message", "사용 가능한 아이디입니다.");
+				String path="/WEB-INF/views/member/member.jsp";
+				forward(req, resp, path);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return;
 		
 	}
 	protected void deleteMember(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//회원 아이디 중복 검사
-		HttpSession session=req.getSession();
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
-		MemberDAO dao=new MemberDAOImpl();
-		
-		dao.deleteMember(info.getUserId());
 		
 		
 		

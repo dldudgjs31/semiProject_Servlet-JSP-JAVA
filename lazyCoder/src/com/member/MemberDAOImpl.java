@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.util.DBConn;
 
@@ -288,6 +290,48 @@ public class MemberDAOImpl implements MemberDAO {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public List<String> listmember() {
+		List<String> list=new ArrayList<String>();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StringBuilder sb=new StringBuilder();
+		String userId;
+		
+		try {
+			sb.append("SELECT userId FROM member1 ");
+			
+			
+			pstmt=conn.prepareStatement(sb.toString());
+
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				userId=rs.getString("userId");
+				
+				list.add(userId);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e2) {
+				}
+			}
+			
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e2) {
+				}
+			}
+		}
+		return list;
 	}
 
 }
