@@ -9,6 +9,15 @@ private String userName;
 private String content;
 private String created;
 private int hitCount;
+private int memberClass;
+
+
+public int getMemberClass() {
+	return memberClass;
+}
+public void setMemberClass(int memberClass) {
+	this.memberClass = memberClass;
+}
 public int getNum() {
 	return num;
 }

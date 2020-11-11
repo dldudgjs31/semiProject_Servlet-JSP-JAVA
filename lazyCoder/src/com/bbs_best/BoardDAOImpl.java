@@ -37,7 +37,31 @@ public class BoardDAOImpl implements BoardDAO{
 		}
 		return result;
 	}
-
+	@Override
+	public int updateHitCount(int num) throws SQLException {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql;
+		
+		// 글보기에서 조회수 증가
+		try {
+			sql = "UPDATE free SET hitCount=hitCount+1 WHERE num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e2) {
+				}
+			}
+		}
+		return result;
+	}
 	@Override
 	public List<BoardDTO> listBoard(int offset, int rows) {
 		List<BoardDTO> list=new ArrayList<BoardDTO>();
@@ -46,11 +70,10 @@ public class BoardDAOImpl implements BoardDAO{
 		StringBuilder sb =new StringBuilder();
 		
 		try {
-			sb.append("SELECT b.num, userName, subject, hitCount, ");
-			sb.append("       created ");
-			sb.append(" FROM best b ");
-			sb.append(" JOIN free f  ON b.userId = f.userId ");
-			sb.append( "WHERE hitCount >=3");
+			sb.append("SELECT num, f.userId, subject, hitCount,TO_CHAR(created, 'YYYY-MM-DD')created, userName ");
+			sb.append(" FROM member1 m ");
+			sb.append(" JOIN free f  ON m.userId = f.userId ");
+			sb.append(" WHERE hitcount  > 10  ");
 			sb.append(" ORDER BY num DESC");
 			sb.append(" OFFSET ? ROWS FETCH FIRST ? ROWS ONLY");
 			
@@ -62,11 +85,13 @@ public class BoardDAOImpl implements BoardDAO{
 			while(rs.next()) {
 				BoardDTO dto=new BoardDTO();
 				dto.setNum(rs.getInt("num"));
-				dto.setUserName(rs.getString("userName"));
+				dto.setUserId(rs.getString("userId"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setHitCount(rs.getInt("hitCount"));
 				dto.setCreated(rs.getString("created"));
+				dto.setUserName(rs.getNString("userName"));
 				list.add(dto);
+			
 			}
 			
 			
@@ -91,50 +116,31 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<BoardDTO> listBoard(int offset, int rows, String condition, String keyword) {
+	public  List<BoardDTO> listBoard() {
 		List<BoardDTO> list=new ArrayList<BoardDTO>();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		StringBuilder sb=new StringBuilder();
 		
 		try {
-			sb.append("SELECT num, userName, subject, hitCount, ");
+			sb.append("SELECT num, userId, subject, hitCount, ");
 			sb.append("       created ");
-			sb.append(" FROM best b ");
-			sb.append(" JOIN free f ON b.userId = f.userId ");
-		
-			if(condition.equals("created")) {
-				keyword=keyword.replaceAll("(\\-|\\/|\\.)", "");
-				sb.append("  WHERE TO_CHAR(created, 'YYYYMMDD') = ? ");
-			} else if(condition.equals("all")) {
-				sb.append("  WHERE INSTR(subject, ?) >= 1 OR INSTR(content, ?) >= 1 ");
-			} else {
-				sb.append("  WHERE INSTR("+condition+", ?) >= 1 ");
-			}
-			
-			sb.append(" ORDER BY num DESC");
-			sb.append(" OFFSET ? ROWS FETCH FIRST ? ROWS ONLY");
+			sb.append(" FROM free  ");
+			sb.append(" WHERE hitCount >10 ");
 			pstmt=conn.prepareStatement(sb.toString());
-			if(condition.equals("all")) {
-				pstmt.setString(1, keyword);
-				pstmt.setString(2, keyword);
-				pstmt.setInt(3, offset);
-				pstmt.setInt(4, rows);
-			} else {
-				pstmt.setString(1, keyword);
-				pstmt.setInt(2, offset);
-				pstmt.setInt(3, rows);
-			}
+			
 			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				BoardDTO dto=new BoardDTO();
 				dto.setNum(rs.getInt("num"));
-				dto.setUserName(rs.getString("userName"));
+				dto.setUserId(rs.getString("userId"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setHitCount(rs.getInt("hitCount"));
 				dto.setCreated(rs.getString("created"));
+				
 				list.add(dto);
+			
 			}
 			
 		} catch (SQLException e) {
@@ -157,6 +163,7 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		return list;
 	}
+
 	@Override
 	public int dataCount() {
 		int result=0;
@@ -165,8 +172,7 @@ public class BoardDAOImpl implements BoardDAO{
 		String sql;
 		
 		try {
-			sql="SELECT COUNT(*) cnt FROM best b"
-					+" JOIN free f  ON b.userId = f.userId";
+			sql="SELECT COUNT(*) cnt FROM ( select num,userId, subject,hitCount,created FROM free )where hitCount >10";
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
@@ -193,8 +199,7 @@ public class BoardDAOImpl implements BoardDAO{
 		String sql;
 		
 		try {
-			sql="SELECT COUNT(*) FROM best b  "
-				 + " JOIN free f ON b.userId = f.userId ";
+			sql="SELECT COUNT(*) cnt FROM ( select num,userId, subject,hitCount,created FROM free )where hitCount >10";
 			
 			if(condition.equals("created")) {
 				keyword=keyword.replaceAll("(\\-|\\/|\\.)", "");
@@ -235,4 +240,49 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		return result;
 	}
-}
+	@Override
+	public BoardDTO readBoard(int num)  {
+		BoardDTO dto=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql;
+		
+		try {
+			sql="SELECT num, f.userId, userName, subject, content, hitCount, created "
+				+"  FROM free f JOIN member1 m ON f.userId = m.userId WHERE num=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				dto = new BoardDTO();
+				dto.setNum(rs.getInt("num"));
+				dto.setUserId(rs.getString("userId"));
+				dto.setUserName(rs.getString("userName"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("content"));
+				dto.setHitCount(rs.getInt("hitCount"));
+				dto.setCreated(rs.getString("created"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e2) {
+				}
+			}
+			
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e2) {
+				}
+			}
+		}
+		return dto;
+	}
+
+	}
+	
+

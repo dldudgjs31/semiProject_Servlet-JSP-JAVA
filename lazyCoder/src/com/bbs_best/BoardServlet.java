@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import com.member.SessionInfo;
 import com.util.MyUtil;
 
@@ -92,9 +93,16 @@ public class BoardServlet extends HttpServlet{
 		if(keyword.length()==0) {
 			list =dao.listBoard(offset, rows);
 		}else {
-			list=dao.listBoard(offset, rows, condition, keyword);
+			list=dao.listBoard();
 		}
 
+		int listNum, n=0;
+		for(BoardDTO dto:list) {
+			listNum=dataCount-(offset+n);
+			dto.setListNum(listNum);
+			n++;
+		}
+		
 		String query="";
 		if(keyword.length()!=0) {
 			query="condition="+condition+"&keyword="
@@ -122,7 +130,38 @@ public class BoardServlet extends HttpServlet{
 		forward(req, resp, path);
 		}
 	protected void article(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		BoardDAO dao=new BoardDAOImpl();
+		String cp=req.getContextPath();
 		
+		try {
+			int num=Integer.parseInt(req.getParameter("num"));
+			String page=req.getParameter("page");
+			
+			String condition=req.getParameter("condition");
+			String keyword=req.getParameter("keyword");
+			if(condition==null) {
+				condition="all";
+				keyword="";
+			}
+			keyword=URLDecoder.decode(keyword,"utf-8");
+
+			// 조회수
+			dao.updateHitCount(num);
+			//게시글
+			BoardDTO dto = dao.readBoard(num);
+			if(dto==null) {
+				resp.sendRedirect(cp+"/bbs_best/list.do?");
+				return;
+			}
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
+			String path="/WEB-INF/views/bbs_best/article.jsp";
+			forward(req, resp, path);
+			return;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		resp.sendRedirect(cp+"/bbs_best/list.do");
 	}
 
 	
