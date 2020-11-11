@@ -288,7 +288,7 @@ public class MemberServlet extends HttpServlet{
 			
 			for(String s : list) {
 				if(s.equals(userId)) {
-					req.setAttribute("message", "아이디가 중복 됩니다.");
+					req.setAttribute("message1", "아이디가 중복 됩니다.");
 					req.setAttribute("mode", "member");
 					req.setAttribute("title", "회원 가입");
 					String path="/WEB-INF/views/member/member.jsp";
@@ -299,7 +299,7 @@ public class MemberServlet extends HttpServlet{
 				req.setAttribute("mode", "member");
 				req.setAttribute("userId", userId);
 				req.setAttribute("title", "회원 가입");
-				req.setAttribute("message", "사용 가능한 아이디입니다.");
+				req.setAttribute("message1", "사용 가능한 아이디입니다.");
 				String path="/WEB-INF/views/member/member.jsp";
 				forward(req, resp, path);
 			

@@ -208,7 +208,7 @@ function userIdCheck() {
                          ${mode=="update" ? "readonly='readonly'":"" }
                          maxlength="15" class="boxTF" placeholder="아이디">
                          <c:if test="${mode=='member' }">
-				     	<button type="button" class="btn" style="margin: 10px 0 0 0; font-family: 'Jua', sans-serif;" onclick="userIdCheck()">아이디 중복 검사</button>${message }
+				     	<button type="button" class="btn" style="margin: 10px 0 0 0; font-family: 'Jua', sans-serif;" onclick="userIdCheck()">아이디 중복 검사</button>${message1 }
 				     	</c:if>
 			        </p>
 			        <p class="help-block">아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.</p>
