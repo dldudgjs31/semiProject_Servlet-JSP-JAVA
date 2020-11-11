@@ -103,6 +103,14 @@ margin-left: 30px;
 	background: yellow;
 	border-radius: 20px;
 }
+.title-style{
+	width:200px;
+	padding:0 5px;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	white-space:nowrap;
+
+}
 </style>
 <script type="text/javascript">
 function article(num){
@@ -153,7 +161,7 @@ function article(num){
 				<div class="img_box"style="background: url('${pageContext.request.contextPath}/uploads/bbs_recruit/${dto.imageFilename}');
 				background-position: center;background-size:cover;background-position:center;height: 110px; border-radius: 15px; border:2px solid silver;">
 				</div>
-				<Br><p style="font-family: 'Jua', sans-serif; font-size: 15px;">
+				<Br><p class="title-style" style="font-family: 'Jua', sans-serif; font-size: 15px;">
 				 ${dto.subject} <p>
 				<p style="font-family: 'Jua', sans-serif; font-size: 15px;">
 				
@@ -166,6 +174,9 @@ function article(num){
 				</c:when>
 				<c:when test="${dto.leftDate<5 && dto.leftDate>0}">
 				 마감임박! D- ${dto.leftDate} 
+				</c:when>
+				<c:when test="${dto.leftDate==0}">
+				 오늘마감!
 				</c:when>
 				</c:choose>
 				</p>

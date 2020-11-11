@@ -6,7 +6,7 @@
 <html>
 <head>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resource/img/titlelogo.png">
-<title>뺀질코딩-채용공고</title>
+<title>뺀질코딩-책추천게시판</title>
 <meta charset="UTF-8">
 <link
 	href="https://fonts.googleapis.com/css2?family=Jua&family=Pathway+Gothic+One&family=Roboto+Condensed&display=swap"
@@ -103,6 +103,14 @@ margin-left: 30px;
 	background: yellow;
 	border-radius: 20px;
 }
+.title-style{
+	width:200px;
+	padding:0 5px;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	white-space:nowrap;
+
+}
 </style>
 <script type="text/javascript">
 function article(num){
@@ -147,23 +155,13 @@ function article(num){
             <tr>
          </c:if>
          <c:if test="${status.index!=0 && status.index%3==0}">
-            <c:out value="</tr><tr>" escapeXml="false"/>
+            <c:out value="</tr><br> <tr>" escapeXml="false"/>
          </c:if>
          <td width="230" align="center">
             <div class="imgLayout" onclick="article('${dto.num}');">
             <div class="img_box"style="background: url('${pageContext.request.contextPath}/uploads/photo/${dto.imageFilename}');
 				background-position: center;background-size:cover;background-position:center;width: 200px; height: 110px; border-radius: 15px; border: 2px solid silver;">
-				</div>
-			<Br><p style="font-family: 'Jua', sans-serif; font-size: 15px;">
-				 ${dto.bookName} |
-				
-				 <c:choose>
-				 <c:when test="${dto.memberClass==0}"> <span>🤴 </span></c:when>
-				 <c:when test="${dto.memberClass==1}"><span>🙇‍♀️</span></c:when>
-				 <c:when test="${dto.memberClass==2}"><span>👨‍💻</span></c:when>
-				 </c:choose>
-			
-				  ${dto.userName}<p>
+				<div style="margin:0 auto; margin-top:80px; width:140px; background-color:none; ; color: white; border-radius: 10px;">
 				<p style="color:gold; font-size: 18px;">
                <c:choose>
                	<c:when test="${dto.rating==1}">★</c:when>
@@ -173,7 +171,22 @@ function article(num){
                 <c:when test="${dto.rating==5}">★★★★★</c:when>
                </c:choose>
                 </p>
-                <Br>
+				</div>
+				
+				
+				</div>
+				</div>
+			<p class="title-style" style="font-family: 'Jua', sans-serif; font-size: 15px;">
+				 ${dto.bookName}</p>
+				<p style="font-family: 'Jua', sans-serif; font-size: 15px;">
+				 <c:choose>
+				 <c:when test="${dto.memberClass==0}"> <span>🤴 </span></c:when>
+				 <c:when test="${dto.memberClass==1}"><span>🙇‍♀️</span></c:when>
+				 <c:when test="${dto.memberClass==2}"><span>👨‍💻</span></c:when>
+				 </c:choose>
+			
+				  ${dto.userName}<p>
+                <Br> 
             
 
           

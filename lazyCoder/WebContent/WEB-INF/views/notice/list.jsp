@@ -82,6 +82,14 @@ margin-left: 30px;
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
 }
+.title-style{
+	width:280px;
+	padding:0 5px;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	white-space:nowrap;
+
+}
 </style>
 <script type="text/javascript">
 	function searchList() {
@@ -209,8 +217,8 @@ margin-left: 30px;
 			      <td>
 			           <span style="display: inline-block;padding:1px 3px; background: #ED4C00;color: #FFFFFF; ">공지</span>
 			      </td>
-			      <td align="left" style="padding-left: 10px;">
-			           <a href="${articleUrl}&num=${dto.num}">${dto.subject}</a>
+			      <td  align="left" style="padding-left: 10px;">
+			           <p class="title-style"><a href="${articleUrl}&num=${dto.num}">${dto.subject}</a></p>
 			      </td>
 			      <td>
 			     <c:choose>

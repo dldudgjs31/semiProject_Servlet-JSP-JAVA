@@ -172,12 +172,12 @@ function userIdCheck() {
 	
     <div class="body-container" style="width: 700px;">
         <div class="body-title">
-            <h3><span style="font-family: Webdings">2</span> ${title} </h3>
+            <h3 style="font-family: 'Jua', sans-serif; "> <img src="${pageContext.request.contextPath}/resource/img/recruit_logo.png" style="width: 50px; height: 37.5px;"> ${title} </h3>
         </div>
         
         <div>
 			<form name="memberForm" method="post">
-			  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px;">
+			  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px;font-family: 'Jua', sans-serif; ">
 			  <tr>
 			      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
 			            <label style="font-weight: 900;">아이디</label>

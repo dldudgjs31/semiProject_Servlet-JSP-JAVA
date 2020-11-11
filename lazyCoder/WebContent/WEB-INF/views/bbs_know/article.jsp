@@ -7,7 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>spring</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resource/img/titlelogo.png">
+<title>뺀질코딩-책추천게시판</title>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/style.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/layout.css" type="text/css">
@@ -25,7 +26,7 @@ function deleteBoard(num) {
 </c:if>
 
 <c:if test="${sessionScope.member.userId!=dto.userId && sessionScope.member.userId!='admin'}">
-   alert("게시물을 삭제할 수 없습니다.")
+   alert("게시물을 삭제할 수 없습니다.");
 </c:if>
 }
 </script>

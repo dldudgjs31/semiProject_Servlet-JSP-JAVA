@@ -16,7 +16,8 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/util.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery/js/jquery.min.js"></script>
-<title>Insert title here</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resource/img/titlelogo.png">
+<title>뺀질코딩-HOT게시판</title>
 <style type="text/css">
 .container {
 	width: 1080px;
@@ -85,10 +86,23 @@ margin-left: 30px;
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
 }
+.title-style{
+	width:350px;
+	padding:0 5px;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	white-space:nowrap;
+
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery/js/jquery.ui.datepicker-ko.js"></script>
-
+<script type="text/javascript">
+	function article(num){
+		var url="${articleUrl}&num="+num;
+		location.href=url;
+	}
+</script>
 </head>
 <body>
 
@@ -112,7 +126,7 @@ margin-left: 30px;
 <div class="container">
     <div class="body-container" style="width: 700px;">
         <div class="body-title">
-            <h3 style="font-family: 'Jua', sans-serif; "> <img src="${pageContext.request.contextPath}/resource/img/free_logo.png" style="width: 50px; height: 37.5px;">자유게시판 </h3>
+            <h3 style="font-family: 'Jua', sans-serif; "> <img src="${pageContext.request.contextPath}/resource/img/free_logo.png" style="width: 50px; height: 37.5px;">HOT 게시판 </h3>
         </div>
         
         <div>
@@ -140,7 +154,11 @@ margin-left: 30px;
 			  <tr align="center" height="35" style="border-bottom: 1px solid #cccccc;"> 
 			      <td>${dto.listNum}</td>
 	
-			        <td align="left">${dto.subject }</td>
+			        <td align="left">
+			          <p class="title-style"> <a href="${articleUrl}&num=${dto.num}">${dto.subject}</a> 
+			          
+			          </p>
+			        </td>
 				
 			      <td>
 			     <c:choose>

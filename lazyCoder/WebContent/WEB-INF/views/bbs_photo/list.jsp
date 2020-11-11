@@ -6,7 +6,7 @@
 <html>
 <head>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resource/img/titlelogo.png">
-<title>뺀질코딩-채용공고</title>
+<title>뺀질코딩-사진게시판</title>
 <meta charset="UTF-8">
 <link
 	href="https://fonts.googleapis.com/css2?family=Jua&family=Pathway+Gothic+One&family=Roboto+Condensed&display=swap"
@@ -103,6 +103,14 @@ margin-left: 30px;
 	background: yellow;
 	border-radius: 20px;
 }
+.title-style{
+	width:200px;
+	padding:0 5px;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	white-space:nowrap;
+
+}
 </style>
 <script type="text/javascript">
 function article(num){
@@ -154,7 +162,7 @@ function article(num){
 			 		<div class="img_box"style="background: url('${pageContext.request.contextPath}/uploads/photo/${dto.fileName}');
 				background-position: center;background-size:cover;background-position:center;height: 110px; border-radius: 15px; border:2px solid silver;">
 				</div><Br>
-				<p style="font-family: 'Jua', sans-serif; font-size: 15px;">
+				<p class="title-style" style="font-family: 'Jua', sans-serif; font-size: 15px;">
 				 ${dto.subject} <p>
 		 	
 			 		</div>

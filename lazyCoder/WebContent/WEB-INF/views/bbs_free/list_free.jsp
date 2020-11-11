@@ -16,7 +16,8 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/util.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery/js/jquery.min.js"></script>
-<title>Insert title here</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resource/img/titlelogo.png">
+<title>뺀질코딩-자유게시판</title>
 <style type="text/css">
 .container {
 	width: 1080px;
@@ -85,6 +86,14 @@ margin-left: 30px;
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
 }
+.title-style{
+	width:350px;
+	padding:0 5px;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	white-space:nowrap;
+
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery/js/jquery.ui.datepicker-ko.js"></script>
@@ -139,14 +148,15 @@ margin-left: 30px;
 			 <c:forEach var="dto" items="${list}">
 			  <tr align="center" height="35" style="border-bottom: 1px solid #cccccc;"> 
 			      <td>${dto.listNum}</td>
-			      <td align="left" style="padding-left: 10px;">
-			           <a href="${articleUrl}&num=${dto.num}">${dto.subject}</a>
-			           
+			      <td align="left" style="padding-left: 10px; display: flex; padding-top: 10px;">
+			          <p class="title-style"> <a href="${articleUrl}&num=${dto.num}">${dto.subject}</a> 
+			          
+			          </p>
 			           <c:if test="${dto.gap<1}">
 			           <!-- new 한시간까지만 보여주게 함 -->
-			           	
-			           	<img src="${pageContext.request.contextPath}/resource/images/new.gif" style="width: 15px; height: 10px;">
+			           <p>	<img src="${pageContext.request.contextPath}/resource/images/new.gif" style="width: 15px; height: 10px;"></p>
 			           </c:if>
+			           
 			      </td>
 			      <td>
 			     <c:choose>

@@ -209,6 +209,7 @@
 	height:250px;
 	margin:2.5%;
 	background: none;
+	text-align: center;
 }
 .img-box{
 	width: 90%;
@@ -216,6 +217,15 @@
 	margin: 5%;
 	border-radius: 20px;
 	border: 2px solid silver;
+}
+.title-style{
+	width:80%;
+	margin-left:10%;
+	text-align:center;
+	padding:0 5px;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	white-space:nowrap;
 }
 </style>
 <script type="text/javascript">
@@ -341,12 +351,15 @@ function article2(num){
 				<c:when test="${dto.leftDate<10 && dto.leftDate>0}">
 				 마감임박! D- ${dto.leftDate} 
 				</c:when>
+				<c:when test="${dto.leftDate==0}">
+				 오늘마감!
+				</c:when>
 				</c:choose>
 			
 			</div>
 			</div>
 			
-			<p>${dto.subject}</p>
+			<p class="title-style">${dto.subject}</p>
 			<p>
 			
 
@@ -369,7 +382,6 @@ function article2(num){
 			
 			</div>
 			
-			<p>${dto.bookName} | 저자 : ${dto.bookInfo } </p>
 			<p style="color:gold; font-size: 23px;">
 			    <c:choose>
 	               	<c:when test="${dto.rating==1}">★</c:when>
@@ -379,6 +391,7 @@ function article2(num){
 	                <c:when test="${dto.rating==5}">★★★★★</c:when>
                </c:choose>
             </p>
+			<p class="title-style">${dto.bookName}</p>
 		</div>
 		</c:forEach>  
 		
@@ -398,8 +411,9 @@ function article2(num){
 			
 			</div>
 			
-			<p>${dto.subject} | 
-						     <c:choose>
+			<p class="title-style">${dto.subject} </p>
+			 <p>
+				<c:choose>
 					 <c:when test="${dto.memberClass==0}"> <span>🤴 </span></c:when>
 					 <c:when test="${dto.memberClass==1}"><span>🙇‍♀️</span></c:when>
 					 <c:when test="${dto.memberClass==2}"><span>👨‍💻</span></c:when>
