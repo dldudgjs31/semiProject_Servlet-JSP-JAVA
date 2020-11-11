@@ -86,6 +86,14 @@ margin-left: 30px;
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
 }
+.title-style{
+	width:350px;
+	padding:0 5px;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	white-space:nowrap;
+
+}
 </style>
 
 <script type="text/javascript">
@@ -159,7 +167,8 @@ margin-left: 30px;
 			 <c:forEach var="dto" items="${list}">
 			  <tr align="center" height="35" style="border-bottom: 1px solid #cccccc;"> 
 			      <td>${dto.listNum}</td>
-			      <td align="left" style="padding-left: 10px;">
+			      <td align="left" style="padding-left: 10px; display: flex; padding-top: 8px;">
+			      <p class="title-style">
 			      	<c:forEach var="n" begin="1" end="${dto.depth}">&nbsp;&nbsp;</c:forEach>
 			      
 			      	<c:if test="${dto.depth!=0}">
@@ -180,10 +189,12 @@ margin-left: 30px;
            			<c:if test="${dto.depth==0}">
            			<a href="${articleUrl}&boardNum=${dto.boardNum}">${dto.subject}</a>
            			</c:if>
-					
+					</p>
+					<p>
 			      	<c:if test="${dto.gap<=1 }">
 			     			<img src="${pageContext.request.contextPath}/resource/images/new.gif" style="width: 15px; height: 10px;">
-			     	</c:if>
+			     	</c:if> 
+			     	</p>
 			      </td>
 			     
 			      <td>

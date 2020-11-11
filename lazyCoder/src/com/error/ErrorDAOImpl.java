@@ -357,7 +357,7 @@ public class ErrorDAOImpl implements ErrorDAO {
 
 				sb.append(" SELECT boardNum, e.userId, userName, subject, ");
 				sb.append("    groupNum, orderNo, depth, hitCount, ");
-				sb.append("    TO_CHAR(created, 'YYYY-MM-DD') created, category, memberClass");
+				sb.append("    created, category, memberClass");
 				sb.append(" FROM error e ");
 				sb.append(" JOIN member1 m ON e.userId = m.userId ");
 				sb.append(" ORDER BY groupNum DESC, orderNo ASC ");
@@ -370,7 +370,7 @@ public class ErrorDAOImpl implements ErrorDAO {
 			} else {
 				sb.append(" SELECT boardNum, e.userId, userName, subject, ");
 				sb.append("    groupNum, orderNo, depth, hitCount, ");
-				sb.append("    TO_CHAR(created, 'YYYY-MM-DD') created, category, memberClass");
+				sb.append("    created, category, memberClass");
 				sb.append(" FROM error e ");
 				sb.append(" JOIN member1 m ON e.userId = m.userId ");
 				sb.append(" WHERE category=? ");
