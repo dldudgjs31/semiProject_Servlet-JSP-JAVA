@@ -166,7 +166,7 @@ margin-left: 30px;
 			 <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">U&nbsp;&nbsp;R&nbsp;&nbsp;L</td>
 			      <td style="padding-left:10px;"> 
-			        <input type="text" name="url" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.url}">
+			        <input type="text" name="url"  class="boxTF" style="width: 95%;" value="${dto.url}">
 			      </td>
 			  </tr>
 			  

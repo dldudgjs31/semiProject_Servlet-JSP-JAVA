@@ -99,6 +99,14 @@ margin-left: 30px;
 	background: yellow;
 	border-radius: 20px;
 }
+
+#video{
+	margin:30px auto;
+	width: 600px;
+	height: 400px;
+	background: white;
+	 overflow-y: scroll;
+}
 </style>
 
 <script type="text/javascript">
@@ -126,88 +134,38 @@ margin-left: 30px;
 		  </aside>
 		  
 </div>
+
 <div class="section" style="background: url('${pageContext.request.contextPath}/resource/img/container1.png');">
 <div class="container">
-    <div class="body-container" style="width: 700px;">
+    <div class="body-container" style="width: 700px;height:1200px;">
       <div class="body-title">
             <h3 style="font-family: 'Jua', sans-serif; "> <img src="${pageContext.request.contextPath}/resource/img/know_logo.png" style="width: 50px; height: 37.5px;">강의공유 게시판 </h3>
         </div>
-        
-        <div>
-			<table style="width: 100%; margin-top: 20px; border-spacing: 0; font-family: 'Jua', sans-serif;">
-			   <tr height="35">
-			      <td align="left" width="50%">
-			           ${dataCount}개(${page}/${total_page} 페이지)
-			      </td>
-			      <td align="right">
-			          &nbsp;
-			      </td>
-			   </tr>
-			</table>
-			
-			<table style="width: 100%; border-spacing: 0; border-collapse: collapse; font-family: 'Jua', sans-serif; ">
-			  <tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <th width="60" style="color: #787878;">번호</th>
-			      <th style="color: #787878;">제목</th>
-			      <th width="100" style="color: #787878;" >작성자</th>
-			      <th width="80" style="color: #787878;">작성일</th>
-			      <th width="60" style="color: #787878;">조회수</th>
-			  </tr>
-			 <c:forEach var="dto" items="${list}">
-			  <tr align="center" height="35" style="border-bottom: 1px solid #cccccc;"> 
-			      <td>${dto.listNum}</td>
-			      <td align="left" style="padding-left: 10px;">
-			         <a href="${articleUrl}&num=${dto.num}">${dto.subject}</a>
-				     	<c:if test="${dto.gap<=1}">
-				     		<img src="${pageContext.request.contextPath }/resource/images/new.gif">
-				    	</c:if>
-			     </td>
-			       <td>${dto.userName }</td>
-     			 	<td>${dto.register_date }</td>
-      				<td>${dto.hitCount}</td>
-			  </tr>
-			</c:forEach>
-			</table>
-			 
-			<table style="width: 100%; margin: 0px auto; border-spacing: 0px; font-family: 'Jua', sans-serif;">
-			   <tr height="35">
-				<td align="center">
-			       ${dataCount==0?"등록된 게시물이 없습니다.": paging }
-				</td>
-			   </tr>
-			</table>
-			
-			<table style="width: 100%; margin: 10px auto; border-spacing: 0px; font-family: 'Jua', sans-serif;">
-			   <tr height="40">
-			      <td align="left" width="100">
-			          <button type="button" class="btn" onclick="javascript:location.href='${pageContext.request.contextPath}';"style="font-family: 'Jua', sans-serif;">새로고침</button>
-			      </td>
-			      <td align="center">
-			          <form name="searchForm" action="${pageContext.request.contextPath}/bbs_lecture/list.do" method="post">
-				              <select name="condition" class="selectField" style="font-family: 'Jua', sans-serif;">
-				                  <option value="subject" ${condition=="subject"?"selected='selected' ":"" }>제목</option>
-				                  <option value="userName" ${condition=="userName"?"selected='selected' ":""}>작성자</option>
-				                  <option value="content" ${condition=="content"?"selected='selected' ":""}>내용</option>
-				                  <option value="register_date" ${condition=="register_date"?"selected='selected' ":""}>등록일</option>
-				            </select>
-			           <input type="text" name="keyword" class="boxTF" value="${keyword}">
-            			<button type="button" onclick="searchList()" style="font-family: 'Jua', sans-serif;">검색</button>
-			        </form>
-			      </td>
-			      <td align="right" width="100" >
-			          <button type="button" class="btn" style="font-family: 'Jua', sans-serif;" onclick="javascript:location.href='${pageContext.request.contextPath}/bbs_lecture/created.do?rows=${rows}';">글올리기</button>
-			      </td>
-			   </tr>
-			</table>
-        </div>
+        <div id="video">
+	        <c:forEach var="vo" items="${list }">
+	        	<div style="text-align: center; font-size: 25px; min-height: 50px;" >
+	        		${vo.subject}
+					${vo.url }
+	        	</div>
+	        	<div style="height: 15px;">&nbsp;</div>
+	        </c:forEach>
+	       </div>
+	     
+			<div style="clear: both;">
+		  <button type="button" class="btn" style="font-family: 'Jua', sans-serif;" onclick="javascript:location.href='${pageContext.request.contextPath}/bbs_lecture/created.do?rows=${rows}';">글올리기</button>
+		  </div>
+
+      
 
     </div>
     </div>
 </div>
 </div>
+		
 </div>
 
-
+	        
+		  
 <div class="footer">
     <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </div>

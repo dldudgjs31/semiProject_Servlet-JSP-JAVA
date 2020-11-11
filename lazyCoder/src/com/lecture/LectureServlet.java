@@ -148,7 +148,8 @@ public class LectureServlet extends HttpServlet {
 		}
 		String paging=util.paging(current_page, total_page, listUrl);
 		
-		// /WEB-INF/views/bbs/list.jsp에 넘겨줄 데이터
+		
+		// /WEB-INF/views/bbs/list.jsp에 넘겨줄 데이터\
 		req.setAttribute("list", list);
 		req.setAttribute("dataCount", dataCount);
 		req.setAttribute("total_page", total_page);
@@ -166,6 +167,7 @@ public class LectureServlet extends HttpServlet {
 
 	protected void createdForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 글쓰기 폼
+		
 		String path="/WEB-INF/views/bbs_lecture/created.jsp";
 		req.setAttribute("mode", "created");
 		forward(req, resp, path);

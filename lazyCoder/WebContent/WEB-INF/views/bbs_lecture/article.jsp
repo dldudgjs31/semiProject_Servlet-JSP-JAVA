@@ -150,7 +150,7 @@ function deleteBoard(num) {
 			<tr style="border-bottom: 1px solid #cccccc; font-family: 'Jua', sans-serif;" >
 			  <td colspan="2" align="left" style="padding: 10px 5px;" valign="top" height="200">
 			      ${dto.content}
-			    <iframe width="560" height="315" src="${dto.url}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			    <iframe width="560" height="315" src="https://www.youtube.com/embed/N82hJpl5cMM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			   </td>
 			</tr>
 		

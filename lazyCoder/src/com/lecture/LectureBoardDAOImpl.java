@@ -203,7 +203,7 @@ public class LectureBoardDAOImpl implements LectureBoardDAO {
 		StringBuilder sb=new StringBuilder();
 		
 		try {
-			sb.append("SELECT num, m.userName, subject, hitCount, ");
+			sb.append("SELECT num, m.userName, subject, hitCount,url, ");
 			sb.append("       register_date ");
 			sb.append(" FROM lecture l ");
 			sb.append(" JOIN member1 m ON l.userId = m.userId ");
@@ -221,6 +221,7 @@ public class LectureBoardDAOImpl implements LectureBoardDAO {
 				dto.setUserName(rs.getString("userName"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setHitCount(rs.getInt("hitCount"));
+				dto.setUrl(rs.getString("url"));
 				dto.setRegister_date(rs.getString("register_date"));
 				list.add(dto);
 			}
