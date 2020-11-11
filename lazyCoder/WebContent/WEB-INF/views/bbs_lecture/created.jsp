@@ -132,16 +132,18 @@ margin-left: 30px;
 
     <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 
-<div class="section" style="background: url('${pageContext.request.contextPath}/resource/img/container1.png');">	
+<div class="section" >	
 <div class="container">
     <div class="body-container" style="width: 700px;">
-        <div class="body-title">
-            <h3><span style="font-family: Webdings">2</span> 강의공유 게시판 </h3>
-        </div>
+         <div class="body-title">
+ 
+            <h3 style="font-family: 'Jua', sans-serif; "> <img src="${pageContext.request.contextPath}/resource/img/know_logo.png" style="width: 50px; height: 37.5px;">강의 공유 게시판 </h3>
+      
+         </div>
         
         <div>
 			<form name="boardForm" method="post">
-			  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
+			  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse; font-family: 'Jua', sans-serif;">
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 			      <td style="padding-left:10px;"> 

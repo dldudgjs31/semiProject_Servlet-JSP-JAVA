@@ -291,7 +291,7 @@ public class LectureBoardDAOImpl implements LectureBoardDAO {
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setHitCount(rs.getInt("hitCount"));
-				dto.setRegister_date(rs.getString("ragister_date"));
+				dto.setRegister_date(rs.getString("register_date"));
 				list.add(dto);
 			}
 			

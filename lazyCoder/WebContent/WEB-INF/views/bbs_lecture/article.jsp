@@ -123,7 +123,7 @@ function deleteBoard(num) {
 
     <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 
-<div class="section" style="background: url('${pageContext.request.contextPath}/resource/img/container1.png');">
+<div class="section" >
 <div class="container">
     <div class="body-container" style="width: 700px;">
         <div class="body-title">
@@ -149,10 +149,15 @@ function deleteBoard(num) {
 			
 			<tr style="border-bottom: 1px solid #cccccc; font-family: 'Jua', sans-serif;" >
 			  <td colspan="2" align="left" style="padding: 10px 5px;" valign="top" height="200">
-			      ${dto.content}
 			    <iframe width="560" height="315" src="https://www.youtube.com/embed/N82hJpl5cMM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			   </td>
 			</tr>
+			<tr style="border-bottom: 1px solid #cccccc; font-family: 'Jua', sans-serif;" >
+			  <td colspan="2" align="left" style="padding: 10px 5px;" valign="top" height="200">
+			      ${dto.content}
+			   </td>
+			</tr>
+			
 		
 			
 			<tr height="35" style="border-bottom: 1px solid #cccccc; font-family: 'Jua', sans-serif;">
@@ -191,9 +196,7 @@ function deleteBoard(num) {
     </div>
 </div>
 
-<div class="footer">
     <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
-</div>
 </div>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery/js/jquery-ui.min.js"></script>

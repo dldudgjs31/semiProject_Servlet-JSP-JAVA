@@ -102,9 +102,9 @@ margin-left: 30px;
 
 #video{
 	margin:30px auto;
-	width: 600px;
+	width: 700px;
 	height: 400px;
-	background: white;
+	background: none;
 	 overflow-y: scroll;
 }
 </style>
@@ -113,6 +113,11 @@ margin-left: 30px;
 	function searchList() {
 		var f=document.searchForm;
 			f.submit();
+	}
+	
+	function article(num){
+		var url="${articleUrl}&num="+num;
+		location.href=url;
 	}
 </script>
 </head>
@@ -143,16 +148,34 @@ margin-left: 30px;
         </div>
         <div id="video">
 	        <c:forEach var="vo" items="${list }">
-	        	<div style="text-align: center; font-size: 25px; min-height: 50px;" >
-	        		${vo.subject}
+	        	<div style="text-align: center;font-family: 'Jua', sans-serif; font-size: 15px; min-height: 50px;" >
+					<hr>
+	        		<p style="font-size: 20px;" onclick="article('${vo.num}');">${vo.subject}</p>
+					<hr>
+					<div style="width: 100%;">
+					<span  style="float: left;">작성자 : ${vo.userName}</span>  <span style="float: right;">조회수 : ${vo.hitCount }</span>
+					</div>
+					<hr>
 					${vo.url }
+					<hr>
+					
 	        	</div>
 	        	<div style="height: 15px;">&nbsp;</div>
 	        </c:forEach>
 	       </div>
-	     
-			<div style="clear: both;">
+	              <table style="width: 100%; border-spacing: 0;">
+            <tr height="35">
+            <td style="width: 33%;"></td>
+            <td align="center" style="width: 33%;">
+                 ${dataCount==0?"등록된 게시물이 없습니다." : paging}
+            </td>
+            <td  style="width: 33%;" align="right" >
 		  <button type="button" class="btn" style="font-family: 'Jua', sans-serif;" onclick="javascript:location.href='${pageContext.request.contextPath}/bbs_lecture/created.do?rows=${rows}';">글올리기</button>
+            
+            </td>
+            </tr>
+         </table>
+			<div style="clear: both;">
 		  </div>
 
       
@@ -166,9 +189,9 @@ margin-left: 30px;
 
 	        
 		  
-<div class="footer">
+
     <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
-</div>
+
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery/js/jquery.ui.datepicker-ko.js"></script>

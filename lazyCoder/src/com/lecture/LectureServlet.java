@@ -97,7 +97,7 @@ public class LectureServlet extends HttpServlet {
 			dataCount=dao.dataCount(condition, keyword);
 		}
 		
-		int rows=10;
+		int rows=3;
 		int total_page=util.pageCount(rows, dataCount);
 		if(current_page>total_page) 
 			current_page=total_page;
