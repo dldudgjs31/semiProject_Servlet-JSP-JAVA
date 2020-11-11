@@ -161,7 +161,7 @@ function article(num){
             <div class="imgLayout" onclick="article('${dto.num}');">
             <div class="img_box"style="background: url('${pageContext.request.contextPath}/uploads/photo/${dto.imageFilename}');
 				background-position: center;background-size:cover;background-position:center;width: 200px; height: 110px; border-radius: 15px; border: 2px solid silver;">
-				<div style="margin:0 auto; margin-top:80px; width:140px; background-color:none; ; color: white; border-radius: 10px;">
+				<div style="margin:0 auto; margin-top:80px; width:95px; height:24px; background-color:navy; ; color: white; border-radius: 10px;">
 				<p style="color:gold; font-size: 18px;">
                <c:choose>
                	<c:when test="${dto.rating==1}">★</c:when>

@@ -24,7 +24,7 @@ public class RecruitDAOImpl implements RecruitDAO {
       
       try {
          sql = " INSERT INTO work(subject, content, userId , imageFilename, register_date, hitCount, deadline) "
-               + " VALUES(?, ?, ?, ?, SYSDATE ,0, ?) ";
+               + " VALUES(?, ?, ?, ?, SYSDATE ,0, TO_DATE(?,'YYYYMMDD')) ";
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1,dto.getSubject());
          pstmt.setString(2,dto.getContent());
@@ -165,11 +165,13 @@ public class RecruitDAOImpl implements RecruitDAO {
                dto.setImageFilename(rs.getString("imageFilename"));
                dto.setCreated(rs.getString("register_date"));
                dto.setDeadline(rs.getString("deadline"));
-               SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+               SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                String now = sdf.format(new Date()); // 2020-11-08
                try {
               	 Date startDate = sdf.parse(now);
               	 Date deadlineDate = sdf.parse(dto.getDeadline());
+              	 System.out.println(deadlineDate);
+              	 System.out.println(startDate);
               	 long left = (deadlineDate.getTime() - startDate.getTime()) / (24*60*60*1000);
               	 dto.setLeftDate(left);
   			} catch (ParseException e) {
