@@ -18,7 +18,7 @@
 	width: 1080px;
 	margin: 0 auto; /* 중앙정렬 */
 	padding: 15px 0;
-}
+}    
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/jquery/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/util.js"></script>
