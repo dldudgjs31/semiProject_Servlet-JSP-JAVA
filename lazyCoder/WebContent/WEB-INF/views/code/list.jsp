@@ -74,7 +74,14 @@ margin-left: 30px;
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
 }
+.title-style{
+	width:300px;
+	padding:0 5px;
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	white-space:nowrap;
 
+}
 </style>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/style.css" type="text/css">
@@ -142,10 +149,12 @@ margin-left: 30px;
 			 <c:forEach var="dto" items="${list}">
 			  <tr align="center" height="35" style="border-bottom: 1px solid #cccccc;"> 
 			      <td>${dto.listNum}</td>
-			      <td align="left" style="padding-left: 10px;">
-			           <a href="${articleUrl}&num=${dto.num}&category=${category}">${dto.subject}</a>
+			      <td align="left" style="padding-left: 10px; display: flex; padding-top: 8px; ">
+			          <p class="title-style"> <a href="${articleUrl}&num=${dto.num}&category=${category}">${dto.subject}</a>
+			          
+			          <p>
 			     		<c:if test="${dto.gap<=1 }">
-			     			<img src="${pageContext.request.contextPath}/resource/images/new.gif" style="width: 15px; height: 10px;">
+			     			<p><img src="${pageContext.request.contextPath}/resource/images/new.gif" style="width: 15px; height: 10px;"><p>
 			     		</c:if>
 			      </td>
 			      <td>${dto.userId}</td>
