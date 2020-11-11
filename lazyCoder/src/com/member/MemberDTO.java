@@ -8,7 +8,7 @@ public class MemberDTO {
 	private String modify_date;
 	private int memberClass;
 	private String email, email1, email2;
-	private String tel,tel1,tel2,tel3;
+	private String tel,tel1,tel2,tel3;  
 	
 	public String getTel1() {
 		return tel1;
