@@ -281,7 +281,6 @@ public class MemberServlet extends HttpServlet{
 	protected void userIdCheck(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//회원 아이디 중복 검사
 		MemberDAO dao=new MemberDAOImpl();
-		String cp=req.getContextPath();
 		List<String> list=dao.listmember();
 		try {
 			String userId=req.getParameter("userId");
