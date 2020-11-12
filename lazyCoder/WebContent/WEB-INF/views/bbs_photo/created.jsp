@@ -48,7 +48,7 @@
     $(function(){ //jQuery 대화상자
     	$("#myPhoto").click(function() { //<img id ="myPhoto"...를 클릭하면
 			var viewer =$("#imagelayout");
-			var s = "<img src= '${pageContext.request.contextPath}/uploads/bbs_photo/${dto.fileName}'width ='570' height='450'>"
+			var s = "<img src='${pageContext.request.contextPath}/uploads/bbs_photo/${dto.fileName}'width ='570' height='450'>"
 			viewer.html(s);
 			
 			$("#photoDialog").dialog({
@@ -124,7 +124,7 @@
 			      <c:if test="${mode=='update'}">
 			      	<input type="hidden" name="page" value="${page }">
 			      	<input type="hidden" name="num" value="${dto.num }">
-			      	<input type="hidden" name="filename" value="${dto.fileName }">
+			      	<input type="hidden" name="fileName" value="${dto.fileName }">
 			      	
 			      </c:if>
 			      

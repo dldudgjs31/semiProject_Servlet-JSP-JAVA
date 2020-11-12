@@ -52,6 +52,9 @@ function deleteBoard(num) {
 			    </td>
 			</tr>
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
+			    <td width="50%" align="left" style="padding-left: 5px;">
+			       이름 :${dto.userName }
+			    </td>
 			   
 			    <td width="50%" align="right" style="padding-right: 5px;">
 					${dto.register_date }
@@ -60,6 +63,7 @@ function deleteBoard(num) {
 			
 				<tr>
 				<td colspan="2" style="padding: 10px 5px; text-align: center;">
+
 				<img src="${pageContext.request.contextPath}/uploads/photo/${dto.fileName}"
 				style="width:600px; height: auto; resize: both;">
 				</td>

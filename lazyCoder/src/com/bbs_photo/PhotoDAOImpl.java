@@ -140,7 +140,7 @@ public class PhotoDAOImpl implements PhotoDAO {
 	      String sql;
 	      
 	      try {
-	         sql="SELECT num, p.userId, subject, fileName,  userName, memberClass  "
+	         sql="SELECT num, p.userId,userName, subject, fileName,  userName, memberClass  "
 	               + " FROM photo p "
 	               + " JOIN member1 m ON p.userId = m.userId "
 	               + " ORDER BY num DESC "
@@ -155,6 +155,7 @@ public class PhotoDAOImpl implements PhotoDAO {
 	            PhotoDTO dto=new PhotoDTO();
 	            dto.setNum(rs.getInt("num"));
 	            dto.setUserId(rs.getString("userId"));
+	            dto.setUserName(rs.getString("userName"));
 	            dto.setSubject(rs.getString("subject"));
 	            dto.setfileName(rs.getString("fileName"));
 	            dto.setUserName(rs.getString("userName"));
@@ -187,7 +188,7 @@ public class PhotoDAOImpl implements PhotoDAO {
 		     ResultSet rs =null;
 		     String sql;
 		     try {
-		    	  sql="SELECT num, p.userId, subject,content,register_date, fileName "
+		    	  sql="SELECT num, p.userId,userName, subject,content,register_date, fileName "
 		                  + " FROM photo p "
 		                  + " JOIN member1 m ON p.userId = m.userId "
 		                  + " WHERE num = ?";
@@ -200,6 +201,8 @@ public class PhotoDAOImpl implements PhotoDAO {
 					dto= new PhotoDTO();
 					dto.setNum(rs.getInt("num"));
 					dto.setUserId(rs.getString("userId"));
+					dto.setUserName(rs.getString("userName"));
+					
 					dto.setSubject(rs.getString("subject"));
 					dto.setContent(rs.getString("content"));
 					dto.setfileName(rs.getString("fileName"));
