@@ -44,22 +44,7 @@
 
         f.submit();
     }
-    <c:if test="${mode=='update'}">
-    $(function(){ //jQuery 대화상자
-    	$("#myPhoto").click(function() { //<img id ="myPhoto"...를 클릭하면
-			var viewer =$("#imagelayout");
-			var s = "<img src='${pageContext.request.contextPath}/uploads/bbs_photo/${dto.fileName}'width ='570' height='450'>"
-			viewer.html(s);
-			
-			$("#photoDialog").dialog({
-				title:"이미지",
-				width:600,
-				height:520,
-				modal:true
-		});
-    });
-    });
-    </c:if>
+
 </script>
 </head>
 <body>
@@ -107,14 +92,7 @@
 			       </td>
 			  </tr> 
 			  
-			  <c:if test="${mode=='update'}"> <!-- 수정일때만 나타내게 --> 
-			   <tr align="left" height="40" style="border-bottom: 1px solid #cccccc;">
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">첨&nbsp;&nbsp;&nbsp;&nbsp;부</td>
-			      <td style="padding-left:10px;"> 
-			     <img id="myPhoto" src="${pageContext.request.contextPath}/uploads/bbs_photo/${dto.fileName}" width="30" height="30" style="cursor: pointer;">
-			      </td>
-			  </tr> 
-			  </c:if>
+			  
 			  
 			  </table>
 			
