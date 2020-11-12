@@ -11,9 +11,6 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Jua&family=Pathway+Gothic+One&family=Roboto+Condensed&display=swap"
 	rel="stylesheet">
-<%-- <link
-	href="${pageContext.request.contextPath}/resource/styles/layout.css"
-	rel="stylesheet" type="text/css" media="all"> --%>
 <style type="text/css">
 .container {
 	width: 1080px;
@@ -29,7 +26,9 @@
 }
 
 <!--
-상단 광고 이미지 슬라이드 style 코드 -->ul, li {
+상단 광고 이미지 슬라이드 style 코드 -->
+
+ul, li {
 	list-style: none;
 }
 

@@ -78,10 +78,10 @@
 			      <td align="center">
 			          <form name="searchForm" action="${pageContext.request.contextPath}/bbs/list.do" method="post">
 				              <select name="condition" class="selectField">
-				                  <option value="subject" ${condition=="subject"?"selected='selected' ":"" }>제목</option>
-				                  <option value="userName" ${condition=="userName"?"selected='selected' ":""}>작성자</option>
-				                  <option value="content" ${condition=="content"?"selected='selected' ":""}>내용</option>
-				                  <option value="created" ${condition=="created"?"selected='selected' ":""}>등록일</option>
+				                  <option value="subject" ${condition=="subject"?"selected='selected' ":"" }>이름</option>
+				                  <option value="userName" ${condition=="userName"?"selected='selected' ":""}>생년월일</option>
+				                  <option value="content" ${condition=="content"?"selected='selected' ":""}>전화</option>
+				                  <option value="created" ${condition=="created"?"selected='selected' ":""}>이메일</option>
 				            </select>
 			           <input type="text" name="keyword" class="boxTF" value="${keyword}">
             			<button type="button" onclick="searchList()">검색</button>
