@@ -169,6 +169,7 @@ public class photoServlet extends MyUploadServlet {
 		   try {
 			   int num= Integer.parseInt(req.getParameter("num"));
 			   PhotoDTO  dto =dao.readPhoto(num);
+			   System.out.println(dto.getFileName());
 			   if(dto==null || !info.getUserId().equals(dto.getUserId())) {
 				//게시물이 없거나 글을 작성한 사람이 아니면
 				   resp.sendRedirect(cp+"/bbs_photo/list.do?page"+page);
@@ -210,17 +211,22 @@ public class photoServlet extends MyUploadServlet {
 			Part p =req.getPart("selectFile");
 			Map<String, String> map =doFileUpload(p, pathname);
 			if(map!=null) {
-				//새로운 이미지를 등록한 경우
-				String filename = map .get("saveFilename");
-				dto.setfileName(filename);;
+				
 				
 				//기존 파일 지우기				파일폴더명,지워야되는파일
-				FileManager.doFiledelete(pathname,filename);
+				FileManager.doFiledelete(pathname,FileName);
+				
+				//새로운 이미지를 등록한 경우
+				String filename = map .get("saveFilename");
+				dto.setfileName(filename);
+
 			}else {
 				//이미지 파일을 변경하지 않은경우
 				dto.setfileName(FileName);
 			
 			}
+			
+			
 			dao.updatePhoto(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
