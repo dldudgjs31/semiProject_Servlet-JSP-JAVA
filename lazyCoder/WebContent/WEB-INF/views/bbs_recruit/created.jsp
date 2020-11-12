@@ -83,7 +83,7 @@
     <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 	
 <div class="container" >
-    <div class="section" style="background: url('${pageContext.request.contextPath}/resource/img/container1.png');">
+    <div class="section" >
         <div class="body-title">
             <h3 style="font-family: 'Jua', sans-serif; "> <img src="${pageContext.request.contextPath}/resource/img/recruit_logo.png" style="width: 50px; height: 37.5px;"> 채용공고 등록</h3>
         </div>

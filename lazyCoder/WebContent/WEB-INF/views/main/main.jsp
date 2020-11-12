@@ -144,8 +144,17 @@
 	padding-top: 100px;
 	padding-left: 100px;
 	color: white;
-	font-size: 20px;
+	font-family: 'Jua', sans-serif;
+	font-size: 40px;
 }
+.main-test1 {
+	padding-top: 100px;
+	padding-left: 780px;
+	color: navy;
+	font-family: 'Jua', sans-serif;
+	font-size: 40px;
+}
+
 
 .main-button {
 	font-family: 'Jua', sans-serif;
@@ -178,10 +187,6 @@
 	width: 100%;
 }
 
-#main-test {
-	font-family: 'Jua', sans-serif;
-	font-size: 40px;
-}
 
 .menu-item {
 	width: 18%;
@@ -265,7 +270,12 @@ function article2(num){
 							<button class="main-button hover1" onclick="location.href='${pageContext.request.contextPath}/intro/intro.jsp'">더 알아보기</button>
 						</p>
 					</li>
-					<li style="background:url('${pageContext.request.contextPath}/resource/img/main2.jpg'); background-size: cover;"></li>
+					<li style="background:url('${pageContext.request.contextPath}/resource/img/main3.jpeg'); background-size: cover;background-position:center;">
+						<p class="main-test1">
+							같이 발전하는 <br>개발자 채용<br>
+							<button class="main-button hover1" onclick="location.href='${pageContext.request.contextPath}/bbs_recruit/list.do'">지원하러가기</button>
+						</p>
+					</li>
 					<li style="background:url('${pageContext.request.contextPath}/resource/img/main1.jpg'); background-size: cover;"></li>
 					<li style="background:url('${pageContext.request.contextPath}/resource/img/main2.jpg'); background-size: cover;"></li>
 				</ul>

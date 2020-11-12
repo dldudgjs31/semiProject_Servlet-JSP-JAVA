@@ -292,7 +292,6 @@ img {
                <ul>
                   <li><a href="${pageContext.request.contextPath}/notice/list.do">공지사항</a></li>
                   <li><a href="${pageContext.request.contextPath}/bbs_recruit/list.do">채용공고</a></li>
-                  <li><a href="#">출석체크!</a></li>
                </ul></li>
                
             

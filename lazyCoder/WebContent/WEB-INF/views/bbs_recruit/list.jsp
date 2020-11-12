@@ -135,7 +135,6 @@ function article(num){
 		    <ul class="sidenav__list">
 		      <li class="sidenav__list-item"><a href="${pageContext.request.contextPath}/notice/list.do"> 공지사항</a></li>
 		      <li class="sidenav__list-item"><a href="${pageContext.request.contextPath}/bbs_recruit/list.do">채용공고</a></li>
-		      <li class="sidenav__list-item">출석체크</li>
 		    </ul>
 		  </aside>
 </div>

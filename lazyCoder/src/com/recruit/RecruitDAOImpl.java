@@ -170,8 +170,6 @@ public class RecruitDAOImpl implements RecruitDAO {
                try {
               	 Date startDate = sdf.parse(now);
               	 Date deadlineDate = sdf.parse(dto.getDeadline());
-              	 System.out.println(deadlineDate);
-              	 System.out.println(startDate);
               	 long left = (deadlineDate.getTime() - startDate.getTime()) / (24*60*60*1000);
               	 dto.setLeftDate(left);
   			} catch (ParseException e) {
